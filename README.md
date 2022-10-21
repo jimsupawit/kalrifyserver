@@ -1,2 +1,2 @@
-# passi-server
+# Kalrify-server
 "# kalrifyserver" 
