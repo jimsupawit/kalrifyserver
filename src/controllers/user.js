@@ -144,7 +144,7 @@ const knex = require("../services/db");
 
 async function getDish(req, res, next){
     try{
-        const dish = await knex('Food Nutrition Fact').select('FoodID','FoodNameENG')
+        const dish = await knex('Food Nutrition Fact').select('FoodID','FoodNameENG','FoodNameTH')
 
         return res.status(200).json({ status: 'SUCCESS', dish })
     } catch(err) {
