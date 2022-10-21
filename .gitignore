@@ -1,0 +1,9 @@
+node_modules/*
+
+package-lock.json
+
+.env
+
+cert/
+
+src/faces/test/
