@@ -9,9 +9,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
-const userRouter = require('./src/routes/user')
+// const userRouter = require('./src/routes/user')
+const dishRouter = require('./src/routes/dish')
 
-app.use('/user', userRouter);
+// app.use('/user', userRouter);
+app.use('/dish', dishRouter);
 
 
 // TEST API

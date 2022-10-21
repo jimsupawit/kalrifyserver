@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const user = require('../controllers/user')
-const checkAuth = require('../middlewares/auth')
+// const checkAuth = require('../middlewares/auth')
 
 // router.get('/', checkAuth, user.getProfile);
 // router.get('/qr', checkAuth, user.getQR);
