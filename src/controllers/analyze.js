@@ -5,6 +5,7 @@ const knex = require("../services/db");
 
 async function getAnalyze(req, res, next){
     try{
+        console.log(req.headers)
         // get data
         const analyze = await knex('Food Nutrition Fact').where("FoodNameENG", req.body).select('FoodID', 'FoodNameENG', 'FoodNameTH', 'Calories', 'Fat', 'Carb', 'Protein', 'Sodium', 'Portion', )
         
