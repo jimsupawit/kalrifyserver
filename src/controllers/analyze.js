@@ -8,7 +8,7 @@ async function getAnalyze(req, res, next){
         console.log('hello')
         console.log(JSON.stringify(req.headers))
         // get data
-        const analyze = await knex('Food Nutrition Fact').where("FoodNameENG", req.body).select('FoodID', 'FoodNameENG', 'FoodNameTH', 'Calories', 'Fat', 'Carb', 'Protein', 'Sodium', 'Portion', )
+        const analyze = await knex('Food Nutrition Fact').where("FoodNameENG", req.headers["food"]).select('FoodID', 'FoodNameENG', 'FoodNameTH', 'Calories', 'Fat', 'Carb', 'Protein', 'Sodium', 'Portion', )
         
         return res.status(200).json({ status: 'SUCCESS', analyze })
     } catch(err) {
