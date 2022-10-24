@@ -13,11 +13,13 @@ app.use(bodyParser.json());
 const dishRouter = require('./src/routes/dish')
 const diaryRouter = require('./src/routes/diary')
 const analyzeRouter = require('./src/routes/analyze')
+const imageRouter = require('./src/routes/image')
 
 // app.use('/user', userRouter);
 app.use('/dish', dishRouter);
 app.use('/diary', diaryRouter);
 app.use('/analyze', analyzeRouter);
+app.use('/analyze', imageRouter);
 
 
 // TEST API
