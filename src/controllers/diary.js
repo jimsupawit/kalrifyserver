@@ -6,7 +6,7 @@ const knex = require("../services/db");
 async function getDiary(req, res, next){
     try{
         // get data
-        const diary = await knex('User_Diary').select()
+        const diary = await knex('User_Diary').select('Image','FoodID', 'FoodNameENG', 'FoodNameTH', 'Calories', 'Fat', 'Carb', 'Protein', 'Sodium', 'Portion',)
         
         return res.status(200).json({ status: 'SUCCESS', diary })
     } catch(err) {
