@@ -6,7 +6,7 @@ const knex = require("../services/db");
 async function getImage(req, res, next){
     try{
         // get data
-        const image = await knex('Food Nutrition Fact').where("FoodNameENG", req.headers["food"]).select()
+        const image = await knex('Food Nutrition Fact').where("FoodNameENG", req.headers["food"]).select('FoodID', 'FoodNameENG', 'FoodNameTH', 'Calories', 'Fat', 'Carb', 'Protein', 'Sodium', 'Portion', 'Image')
         
         return res.status(200).json({ status: 'SUCCESS', image })
     } catch(err) {

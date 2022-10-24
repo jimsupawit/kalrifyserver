@@ -19,7 +19,7 @@ const imageRouter = require('./src/routes/image')
 app.use('/dish', dishRouter);
 app.use('/diary', diaryRouter);
 app.use('/analyze', analyzeRouter);
-app.use('/analyze', imageRouter);
+app.use('/image', imageRouter);
 
 
 // TEST API
