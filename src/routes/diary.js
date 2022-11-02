@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 const diary = require('../controllers/diary')
+const checkAuth = require('../middlewares/auth')
 
-router.get('/getDiary', diary.getDiary)
+router.get('/getDiary',checkAuth, diary.getDiary)
 
 module.exports = router
