@@ -6,7 +6,7 @@ async function register(req, res, next) {
     const { email, password, username, weight, height } = req.body;
 
     if (!(email && password && username && weight && height)) {
-        console.log('FIELDS_ARE_REQUIRED 😢'); return res.status(400).json({ status: 'FIELDS_ARE_REQUIRED' });
+        console.log('FIELDS_ARE_REQUIRED'); return res.status(400).json({ status: 'FIELDS_ARE_REQUIRED' });
     }
 
     var salt = bcrypt.genSaltSync(10);
@@ -19,7 +19,7 @@ async function register(req, res, next) {
 
         return res.status(200).json({ status: 'SUCCESS', token })
     } catch(err) {
-        console.log('SOMETHING_WENT_WRONG 😢', err);
+        console.log('SOMETHING_WENT_WRONG', err);
         return res.status(400).json({ status: 'ERROR'})
     }
 }
@@ -29,7 +29,7 @@ async function login(req, res, next) {
     const { username, password } = req.body;
 
     if (!(username && password)) {
-        console.log('FIELDS_ARE_REQUIRED 😢'); return res.status(400).json({ status: 'FIELDS_ARE_REQUIRED' });
+        console.log('FIELDS_ARE_REQUIRED'); return res.status(400).json({ status: 'FIELDS_ARE_REQUIRED' });
     }
 
     try {
@@ -44,7 +44,7 @@ async function login(req, res, next) {
             return res.status(400).json({ status: 'PASSWORD_NOT_MATCHED' })
         }
     } catch(err) {
-        console.log('SOMETHING_WENT_WRONG 😢', err);
+        console.log('SOMETHING_WENT_WRONG', err);
         return res.status(400).json({ status: 'SOMETHING_WENT_WRONG' })
     }
 }
