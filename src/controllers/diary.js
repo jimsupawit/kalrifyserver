@@ -18,6 +18,7 @@ async function getDiary(req, res, next){
 async function addDiary(req, res, next) {
     // const { id } = req.user;
     const  id  = "1";
+    print(req.body)
     var date = req.body.date;
     var total = req.body.total;
     const dish = req.body.dish;
