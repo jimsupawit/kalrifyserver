@@ -15,13 +15,15 @@ const diaryRouter = require('./src/routes/diary')
 const analyzeRouter = require('./src/routes/analyze')
 const imageRouter = require('./src/routes/image')
 const authRouter = require('./src/routes/auth')
+const addDiaryRouter = require('./src/routes/addDiary')
 
 // app.use('/user', userRouter);
 app.use('/dish', dishRouter);
 app.use('/diary', diaryRouter);
 app.use('/analyze', analyzeRouter);
 app.use('/image', imageRouter);
-app.use('/auth', authRouter)
+app.use('/auth', authRouter);
+app.use('/addDiary', addDiaryRouter);
 
 
 // TEST API
