@@ -19,11 +19,13 @@ async function getDiary(req, res, next){
 
 async function addDiary(req, res, next) {
     const { id } = req.user;
-    const { date, total, foodNameENG, foodNameTH, Calories, Fat, Carb, Protein, Sodium, Portion } = req.body;
+    const { date, total, dish } = req.body;
+    // foodNameENG, foodNameTH, Calories, Fat, Carb, Protein, Sodium, Portion
+    // {"foodNameENG": foodNameENG, "foodNameTH":foodNameTH, "Calories":Calories, "Fat":Fat, "Carb":Carb, "Protein":Protein, "Sodium":Sodium, "Portion":Portion}
 
     const check = await knex('UserDiary').select(coalesce(sum(date),0)).where({ uid:id, date:date })
     print(check);
-    const dishList = {body: [{"foodNameENG": foodNameENG, "foodNameTH":foodNameTH, "Calories":Calories, "Fat":Fat, "Carb":Carb, "Protein":Protein, "Sodium":Sodium, "Portion":Portion}]}
+    const dishList = {body: [dish]}
 
     if(check=0){
         try {
