@@ -34,7 +34,7 @@ async function addDiary(req, res, next) {
     
                 // const token = jwt.sign({ id: id[0] }, process.env.TOKEN_KEY);
     
-                return res.status(200).json({ status: 'SUCCESS', diary})
+                return res.status(200).json({ status: 'SUCCESS', date})
         // }else{
         //         const oldTotal = await knex('UserDiary').select(total).where({ uid:id, date:date })
         //         const newList = await knex('UserDiary').select(dishList).where({ uid:id, date:date })
