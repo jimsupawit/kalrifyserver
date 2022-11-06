@@ -18,7 +18,9 @@ async function getDiary(req, res, next){
 async function addDiary(req, res, next) {
     // const { id } = req.user;
     const { id } = 1;
-    const { date, total, dish } = req.body;
+    const date = req.body["date"];
+    const total = req.body["total"];
+    const dish = req.body["dish"];
     // foodNameENG, foodNameTH, Calories, Fat, Carb, Protein, Sodium, Portion
     // {"foodNameENG": foodNameENG, "foodNameTH":foodNameTH, "Calories":Calories, "Fat":Fat, "Carb":Carb, "Protein":Protein, "Sodium":Sodium, "Portion":Portion}
 
@@ -28,7 +30,7 @@ async function addDiary(req, res, next) {
     try {
         // if(check=0){
     
-                const diary = await knex('UserDiary').insert({ id, date, total, dishList })
+                const diary = await knex('UserDiary').insert({ uid:id, date:date, totalCal:total, dishList:dishList })
     
                 // const token = jwt.sign({ id: id[0] }, process.env.TOKEN_KEY);
     
