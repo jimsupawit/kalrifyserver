@@ -18,7 +18,8 @@ async function getDiary(req, res, next){
 
 
 async function addDiary(req, res, next) {
-    const { id } = req.user;
+    // const { id } = req.user;
+    const { id } = 1;
     const { date, total, dish } = req.body;
     // foodNameENG, foodNameTH, Calories, Fat, Carb, Protein, Sodium, Portion
     // {"foodNameENG": foodNameENG, "foodNameTH":foodNameTH, "Calories":Calories, "Fat":Fat, "Carb":Carb, "Protein":Protein, "Sodium":Sodium, "Portion":Portion}
