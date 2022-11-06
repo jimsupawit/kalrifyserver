@@ -30,11 +30,11 @@ async function addDiary(req, res, next) {
     try {
         // if(check=0){
     
-                const diary = await knex('UserDiary').insert({ uid:id, date:"11-Nov-2022", totalCal:"1000" })
+                const diary = await knex('UserDiary').insert({ uid:id, date:date, totalCal:total })
     
                 // const token = jwt.sign({ id: id[0] }, process.env.TOKEN_KEY);
     
-                return res.status(200).json({ status: 'SUCCESS', date})
+                return res.status(200).json({ status: 'SUCCESS', diary})
         // }else{
         //         const oldTotal = await knex('UserDiary').select(total).where({ uid:id, date:date })
         //         const newList = await knex('UserDiary').select(dishList).where({ uid:id, date:date })
