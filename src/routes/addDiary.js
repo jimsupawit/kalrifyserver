@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-const adddiary = require('../controllers/adddiary')
+const addDiary = require('../controllers/addDiary')
 const checkAuth = require('../middlewares/auth')
 
-router.post('/addDiary', adddiary.addDiary)
+router.post('/addUserdiary', addDiary.addUserdiary)
 
 module.exports = router

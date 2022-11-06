@@ -2,10 +2,10 @@ require('dotenv').config()
 const knex = require("../services/db");
 
 
-async function addDiary(req, res, next) {
+async function addUserdiary(req, res, next) {
     // const { id } = req.user;
     const  id  = "1";
-    const date = req.body["date"];
+    const date = req.body.date;
     const total = req.body.total;
     const dish = req.body.dish;
     // foodNameENG, foodNameTH, Calories, Fat, Carb, Protein, Sodium, Portion
@@ -44,5 +44,5 @@ async function addDiary(req, res, next) {
 
 
 module.exports = {
-    addDiary
+    addUserdiary
 }
