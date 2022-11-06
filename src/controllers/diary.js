@@ -20,7 +20,6 @@ async function addDiary(req, res, next) {
     const  id  = "1";
     const date = req.body.date;
     const total = req.body.total;
-    print(date)
     const dish = req.body.dish;
     // foodNameENG, foodNameTH, Calories, Fat, Carb, Protein, Sodium, Portion
     // {"foodNameENG": foodNameENG, "foodNameTH":foodNameTH, "Calories":Calories, "Fat":Fat, "Carb":Carb, "Protein":Protein, "Sodium":Sodium, "Portion":Portion}
@@ -31,11 +30,11 @@ async function addDiary(req, res, next) {
     try {
         // if(check=0){
     
-                const diary = await knex('UserDiary').insert({ uid:id, date:date, totalCal:total })
+                const diary = await knex('UserDiary').insert({ uid:id, date:"11-Nov-2022", totalCal:"1000" })
     
                 // const token = jwt.sign({ id: id[0] }, process.env.TOKEN_KEY);
     
-                return res.status(200).json({ status: 'SUCCESS', diary})
+                return res.status(200).json({ status: 'SUCCESS', date})
         // }else{
         //         const oldTotal = await knex('UserDiary').select(total).where({ uid:id, date:date })
         //         const newList = await knex('UserDiary').select(dishList).where({ uid:id, date:date })
