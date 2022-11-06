@@ -22,6 +22,7 @@ async function addDiary(req, res, next) {
     const { date, total, dishList } = req.body;
 
     const check = await knex('UserDiary').select(coalesce(sum(date),0)).where({ uid:id, date:date })
+    print(check);
 
 
     if(check=0){
