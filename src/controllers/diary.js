@@ -17,7 +17,7 @@ async function getDiary(req, res, next){
 
 async function addDiary(req, res, next) {
     // const { id } = req.user;
-    const  id  = "1";
+    const  uid  = "1";
     const {date, totalCal, dish} = req.body;
     // const date = req.body["date"];
     // const total = req.body.total;
@@ -27,11 +27,11 @@ async function addDiary(req, res, next) {
 
     // const check = await knex('UserDiary').select(coalesce(sum(date),0)).where({ uid:id, date:date })
     // print(check);
-    const dishList = {body: [req.body.dish]}
+    const dishList = {body: [dish]}
     try {
         // if(check=0){
     
-        const diary = await knex('UserDiary').insert({ id, date, totalCal })
+        const diary = await knex('UserDiary').insert({ uid, date, totalCal, dishList })
     
                 // const token = jwt.sign({ id: id[0] }, process.env.TOKEN_KEY);
     
