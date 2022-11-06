@@ -1,6 +1,4 @@
 require('dotenv').config() 
-var bcrypt = require('bcryptjs');
-const jwt = require("jsonwebtoken");
 const knex = require("../services/db");
 
 
@@ -27,35 +25,31 @@ async function addDiary(req, res, next) {
     const check = await knex('UserDiary').select(coalesce(sum(date),0)).where({ uid:id, date:date })
     print(check);
     const dishList = {body: [dish]}
+    try {
+        if(check=0){
+    
+                const diary = await knex('UserDiary').insert({ id, date, total, dishList })
+    
+                // const token = jwt.sign({ id: id[0] }, process.env.TOKEN_KEY);
+    
+                return res.status(200).json({ status: 'SUCCESS', diary})
+        }else{
+                const oldTotal = await knex('UserDiary').select(total).where({ uid:id, date:date })
+                const newList = await knex('UserDiary').select(dishList).where({ uid:id, date:date })
+                const newTotal = oldTotal+total;
+                newList["body"].add(dishList["body"][0]);
 
-    if(check=0){
-        try {
-            const diary = await knex('UserDiary').insert({ id, date, total, dishList })
+
+                const diary = await knex('UserDiary').where({uid:id, date:date}).update({ newTotal, newList })
     
-            // const token = jwt.sign({ id: id[0] }, process.env.TOKEN_KEY);
+                // const token = jwt.sign({ id: id[0] }, process.env.TOKEN_KEY);
     
-            return res.status(200).json({ status: 'SUCCESS', diary})
-        } catch(err) {
-            console.log('SOMETHING_WENT_WRONG 😢', err);
-            return res.status(400).json({ status: 'ERROR'})
+                return res.status(200).json({ status: 'SUCCESS'})
         }
-    }else{
-        try {
-            const oldTotal = await knex('UserDiary').select(total).where({ uid:id, date:date })
-            const newList = await knex('UserDiary').select(dishList).where({ uid:id, date:date })
-            const newTotal = oldTotal+total;
-            newList["body"].add(dishList["body"][0]);
 
-
-            const diary = await knex('UserDiary').where({uid:id, date:date}).update({ newTotal, newList })
-    
-            // const token = jwt.sign({ id: id[0] }, process.env.TOKEN_KEY);
-    
-            return res.status(200).json({ status: 'SUCCESS'})
-        } catch(err) {
-            console.log('SOMETHING_WENT_WRONG 😢', err);
-            return res.status(400).json({ status: 'ERROR'})
-        }
+    } catch(err) {
+    console.log('SOMETHING_WENT_WRONG 😢', err);
+    return res.status(400).json({ status: 'ERROR'})
     }
 }
 
