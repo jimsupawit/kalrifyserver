@@ -16,6 +16,47 @@ async function getDiary(req, res, next){
     }
 }
 
+
+async function addDiary(req, res, next) {
+    const { id } = req.user;
+    const { date, total, dishList } = req.body;
+
+    const check = await knex('UserDiary').select(coalesce(sum(date),0)).where({ uid:id, date:date })
+
+
+    if(check=0){
+        try {
+            const diary = await knex('UserDiary').insert({ id, date, total, dishList })
+    
+            // const token = jwt.sign({ id: id[0] }, process.env.TOKEN_KEY);
+    
+            return res.status(200).json({ status: 'SUCCESS'})
+        } catch(err) {
+            console.log('SOMETHING_WENT_WRONG 😢', err);
+            return res.status(400).json({ status: 'ERROR'})
+        }
+    }else{
+        try {
+            const oldTotal = await knex('UserDiary').select(total).where({ uid:id, date:date })
+            const newList = await knex('UserDiary').select(dishList).where({ uid:id, date:date })
+            const newTotal = oldTotal+total;
+            newList["body"].add(dishList);
+
+
+            const diary = await knex('UserDiary').where({uid:id, date:date}).update({ newTotal, newList })
+    
+            // const token = jwt.sign({ id: id[0] }, process.env.TOKEN_KEY);
+    
+            return res.status(200).json({ status: 'SUCCESS'})
+        } catch(err) {
+            console.log('SOMETHING_WENT_WRONG 😢', err);
+            return res.status(400).json({ status: 'ERROR'})
+        }
+    }
+}
+
+
 module.exports = {
-    getDiary
+    getDiary,
+    addDiary
 }

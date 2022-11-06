@@ -5,5 +5,6 @@ const diary = require('../controllers/diary')
 const checkAuth = require('../middlewares/auth')
 
 router.get('/getDiary',checkAuth, diary.getDiary)
+router.post('/addDiary',checkAuth, diary.addDiary)
 
 module.exports = router
