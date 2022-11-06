@@ -19,7 +19,9 @@ async function getDiary(req, res, next){
 
 async function addDiary(req, res, next) {
     const { id } = req.user;
-    const { date, total, dish } = req.body;
+    const  date = req.headers["date"]
+    const total = req.headers["total"]
+    const dish = req.headers["dish"]
     // foodNameENG, foodNameTH, Calories, Fat, Carb, Protein, Sodium, Portion
     // {"foodNameENG": foodNameENG, "foodNameTH":foodNameTH, "Calories":Calories, "Fat":Fat, "Carb":Carb, "Protein":Protein, "Sodium":Sodium, "Portion":Portion}
 
