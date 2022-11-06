@@ -19,9 +19,7 @@ async function getDiary(req, res, next){
 
 async function addDiary(req, res, next) {
     const { id } = req.user;
-    const  date = req.headers["date"]
-    const total = req.headers["total"]
-    const dish = req.headers["dish"]
+    const { date, total, dish } = req.body;
     // foodNameENG, foodNameTH, Calories, Fat, Carb, Protein, Sodium, Portion
     // {"foodNameENG": foodNameENG, "foodNameTH":foodNameTH, "Calories":Calories, "Fat":Fat, "Carb":Carb, "Protein":Protein, "Sodium":Sodium, "Portion":Portion}
 
@@ -35,7 +33,7 @@ async function addDiary(req, res, next) {
     
             // const token = jwt.sign({ id: id[0] }, process.env.TOKEN_KEY);
     
-            return res.status(200).json({ status: 'SUCCESS'})
+            return res.status(200).json({ status: 'SUCCESS', diary})
         } catch(err) {
             console.log('SOMETHING_WENT_WRONG 😢', err);
             return res.status(400).json({ status: 'ERROR'})
