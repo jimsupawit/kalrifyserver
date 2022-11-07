@@ -6,7 +6,7 @@ async function getDiary(req, res, next){
     const { id } = req.user;
     try{
         // get data
-        const diary = await knex('user_diary').select().where({ uid:id })
+        const diary = await knex('user_diary').where({ uid:id })
         return res.status(200).json({ status: 'SUCCESS', diary })
         
     } catch(err) {
