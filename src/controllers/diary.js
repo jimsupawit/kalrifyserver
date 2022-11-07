@@ -33,7 +33,7 @@ async function addDiary(req, res, next) {
     try {
         // if(check=0){
     
-        const diary = await knex.insert({ uid:uid, totalCal:total_Cal, dishList:dish_List }).into('user_diary')
+        const diary = await knex.insert({ uid:id, totalCal:total_Cal, dishList:dish_List }).into('user_diary')
         // const diary = knex('user_diary').insert({ uid, totalCal, dishList })
                 // const token = jwt.sign({ id: id[0] }, process.env.TOKEN_KEY);
     
