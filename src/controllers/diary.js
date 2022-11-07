@@ -6,7 +6,7 @@ async function getDiary(req, res, next){
     const { id } = req.user;
     try{
         // get data
-        const diary = await knex('UserDiary').select().where({ uid:id })
+        const diary = await knex('user_diary').select().where({ uid:id })
         return res.status(200).json({ status: 'SUCCESS', diary })
         
     } catch(err) {
@@ -16,9 +16,11 @@ async function getDiary(req, res, next){
 
 
 async function addDiary(req, res, next) {
-    // const { id } = req.user;
-    const  uid  = "1";
-    const {date, totalCal, dish} = req.body;
+    const { id } = req.user;
+    // const  uid  = "1";
+    console.log(req.body)
+    const { total_Cal, dish_List } = req.body;
+    
     // const date = req.body["date"];
     // const total = req.body.total;
     // const dish = req.body.dish;
@@ -27,15 +29,15 @@ async function addDiary(req, res, next) {
 
     // const check = await knex('UserDiary').select(coalesce(sum(date),0)).where({ uid:id, date:date })
     // print(check);
-    const dishList = {body: [dish]}
+    // const dishL = {body: [dishL]}
     try {
         // if(check=0){
     
-        const diary = await knex('UserDiary').insert({ uid, date, totalCal, dishList })
-    
+        const diary = await knex.insert({ uid:uid, totalCal:total_Cal, dishList:dish_List }).into('user_diary')
+        // const diary = knex('user_diary').insert({ uid, totalCal, dishList })
                 // const token = jwt.sign({ id: id[0] }, process.env.TOKEN_KEY);
     
-        return res.status(200).json({ status: 'SUCCESS', diary})
+        return res.status(200).json({ status: 'SUCCESS', total_Cal, dish_List})
         // }else{
         //         const oldTotal = await knex('UserDiary').select(total).where({ uid:id, date:date })
         //         const newList = await knex('UserDiary').select(dishList).where({ uid:id, date:date })
