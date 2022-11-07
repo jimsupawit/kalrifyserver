@@ -57,7 +57,7 @@ async function addDiary(req, res, next) {
                 const oldTotal = await knex('user_diary').select('totalCal').where({ uid:id }).where('date', '>=', date_Now+"T00:00:00Z").where('date','<=', date_Now+'T23:59:59Z')
                 const dbList = await knex('user_diary').select('dishList').where({ uid:id }).where('date', '>=', date_Now+"T00:00:00Z").where('date','<=', date_Now+'T23:59:59Z')
                 const diaryID = await knex('user_diary').select('id').where({ uid:id }).where('date', '>=', date_Now+"T00:00:00Z").where('date','<=', date_Now+'T23:59:59Z')
-                const newTotal = oldTotal[0].totalCal+total_Cal;
+                const newTotal = oldTotal[0].totalCal+parseFloat(total_Cal);
                 console.log(dbList[0].dishList)
                 const temp = JSON.parse(dbList[0].dishList)
                 temp["body"].push(dish_List["body"][0])
