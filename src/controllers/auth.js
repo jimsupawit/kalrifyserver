@@ -3,17 +3,17 @@ const jwt = require("jsonwebtoken");
 const knex = require("../services/db");
 
 async function register(req, res, next) {
-    const { email, password, username, weight, height } = req.body;
+    const { email, password, username, gender, weight, height, age } = req.body;
 
-    if (!(email && password && username && weight && height)) {
-        console.log('FIELDS_ARE_REQUIRED'); return res.status(400).json({ status: 'FIELDS_ARE_REQUIRED' });
+    if (!(email && password && username && weight && height && gender && age)) {
+        console.log('FIELDS_ARE_REQUIRED', req.body); return res.status(400).json({ status: 'FIELDS_ARE_REQUIRED' });
     }
 
     var salt = bcrypt.genSaltSync(10);
     var hash = bcrypt.hashSync(password, salt);
 
     try {
-        const id = await knex('Users').insert({ username, email, password: hash, weight, height })
+        const id = await knex('Users').insert({ username, email, password: hash, weight, height, gender, age})
 
         const token = jwt.sign({ id: id[0] }, process.env.TOKEN_KEY);
 
