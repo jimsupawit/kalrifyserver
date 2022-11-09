@@ -128,7 +128,7 @@ async function getProfile(req, res, next) {
     const { id } = req.user;
 
     try {
-        const user = await knex('Users').select('weight', 'height', 'age', 'gender').where({ 'id': id })
+        const user = await knex('Users').select('weight', 'height', 'age', 'gender').where({ id: id })
         if (!user) return res.status(404).json({ status: 'USER_NOT_FOUND' })
 
         return res.status(200).json({ status: 'SUCCESS', user })
