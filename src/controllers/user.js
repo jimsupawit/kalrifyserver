@@ -125,8 +125,8 @@ const knex = require("../services/db");
 // // GET PROFILE
 async function getProfile(req, res, next) {
     // console.log('[GET] /user');
-    const { id } = req.user;
-
+    // const { id } = req.user;
+    const { id } = '1';
     try {
         const user = await knex('Users').select('weight', 'height', 'age', 'gender').where({ id: id })
         if (!user) return res.status(404).json({ status: 'USER_NOT_FOUND' })
