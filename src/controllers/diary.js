@@ -15,6 +15,34 @@ async function getDiary(req, res, next){
     }
 }
 
+async function getTotalcal(req, res, next){
+    const { id } = req.user;
+    // const  id  = "1";
+    const {date_Now} = req.body;
+
+    const check = await knex('user_diary').select('date').where({ uid:id }).where('date', '>=', date_Now+"T00:00:00Z").where('date','<=', date_Now+'T23:59:59Z')
+
+    if(check[0]==null){
+        console.log('null')
+    try{
+        const diary = [{"totalCal": 0}]
+    
+        return res.status(200).json({ status: 'SUCCESS', diary})
+    } catch(err) {
+        return res.status(400).json({ status: 'SOMETHING_WENT_HORRIBLYWRONG' })
+    }
+    }else{
+        try{
+            // get data
+            const diary = await knex('user_diary').select('totalCal').where({ uid:id }).where('date', '>=', date_Now+"T00:00:00Z").where('date','<=', date_Now+'T23:59:59Z')
+            return res.status(200).json({ status: 'SUCCESS', diary })
+            
+        } catch(err) {
+            return res.status(400).json({ status: 'SOMETHING_WENT_HORRIBLYWRONG' })
+        }
+    }
+}
+
 
 async function addDiary(req, res, next) {
     const { id } = req.user;
@@ -81,5 +109,6 @@ async function addDiary(req, res, next) {
 
 module.exports = {
     getDiary,
-    addDiary
+    addDiary,
+    getTotalcal
 }
