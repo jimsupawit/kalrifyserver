@@ -18,7 +18,7 @@ async function getDiary(req, res, next){
 async function getTotalcal(req, res, next){
     const { id } = req.user;
     // const  id  = "1";
-    const {date_Now} = req.body;
+    date_Now = req.headers["date"];
 
     const check = await knex('user_diary').select('date').where({ uid:id }).where('date', '>=', date_Now+"T00:00:00Z").where('date','<=', date_Now+'T23:59:59Z')
 
