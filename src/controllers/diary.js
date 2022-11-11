@@ -106,9 +106,52 @@ async function addDiary(req, res, next) {
     }
 }
 
+async function delDiary(req, res, next){
+    const { id } = req.user;
+    // const  id  = "1";
+    const { 
+        dishID,
+        dishIndex,
+        cal
+    } = req.body;
+    const dishListData = await knex('user_diary').select('dishList').where({ id:dishID })
+    const calData = await knex('user_diary').select('totalCal').where({ id:dishID })
+    const newCal = calData[0].totalCal-cal;
+    console.log(dishListData[0].dishList)
+    const temp = JSON.parse(dishListData[0].dishList)
+    console.log(temp["body"])
+    console.log(dishIndex)
+    var newList = temp["body"].splice(dishIndex-1,1);
+    newList = {"body": newList}
+    newListData = JSON.stringify(newList)
+    console.log(newListData)
+    if(newCal!=0){
+    try{
+
+    const diary = await knex('user_diary').where({ id:dishID }).update({ totalCal:newCal, dishList:newListData })
+
+    return res.status(200).json({ status: 'SUCCESS', newList, newCal})
+    } catch(err) {
+        return res.status(400).json({ status: 'SOMETHING_WENT_HORRIBLYWRONG' })
+    }
+    }else{
+    try{
+        const diary = await knex('user_diary').where({ id:dishID }).del()
+
+        return res.status(200).json({ status: 'SUCCESS', newList, newCal})
+        } catch(err) {
+            return res.status(400).json({ status: 'SOMETHING_WENT_HORRIBLYWRONG' })
+        } 
+    }
+
+
+
+}
+
 
 module.exports = {
     getDiary,
     addDiary,
-    getTotalcal
+    getTotalcal,
+    delDiary
 }
