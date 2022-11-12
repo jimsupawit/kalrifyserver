@@ -8,5 +8,6 @@ router.get('/getDiary',checkAuth, diary.getDiary)
 router.post('/addDiary',checkAuth, diary.addDiary)
 router.get('/getTotalcal',checkAuth, diary.getTotalcal)
 router.post('/delDiary',checkAuth, diary.delDiary)
+router.get('/findDishlist',checkAuth, diary.findDishlist)
 
 module.exports = router

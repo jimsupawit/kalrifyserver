@@ -149,10 +149,26 @@ async function delDiary(req, res, next){
 
 }
 
+async function findDishlist(req, res, next){
+    const { id } = req.user;
+    // const  id  = "1";
+    date_Now = req.headers["date"];
+
+    try{
+        const dishList = await knex('user_diary').select('dishList').where({ uid:id }).where('date', '>=', date_Now+"T00:00:00Z").where('date','<=', date_Now+'T23:59:59Z')
+
+        return res.status(200).json({ status: 'SUCCESS', dishList})
+    } catch(err) {
+        return res.status(400).json({ status: 'SOMETHING_WENT_HORRIBLYWRONG' })
+    } 
+
+}
+
 
 module.exports = {
     getDiary,
     addDiary,
     getTotalcal,
-    delDiary
+    delDiary,
+    findDishlist
 }
