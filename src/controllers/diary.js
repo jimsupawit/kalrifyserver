@@ -57,7 +57,8 @@ async function addDiary(req, res, next) {
         Carb, 
         Protein, 
         Sodium, 
-        Portion
+        Portion,
+        meal
     } = req.body;
     const date_Time = date_Now+ " 12:00:00";
     
@@ -72,7 +73,8 @@ async function addDiary(req, res, next) {
         "Carb":parseFloat(Carb), 
         "Protein":parseFloat(Protein), 
         "Sodium":parseFloat(Sodium), 
-        "Portion":parseFloat(Portion)
+        "Portion":parseFloat(Portion),
+        "Meal": meal,
     }]}
 
     console.log(dish_List)
