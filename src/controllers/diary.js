@@ -78,7 +78,7 @@ async function addDiary(req, res, next) {
     try {
         if(check[0]==null){
             console.log('null')
-        const diary = await knex.insert({ uid:id, totalCal:total_Cal, dishList:dish_List }).into('user_diary')
+        const diary = await knex.insert({ uid:id,date:date_Now, totalCal:total_Cal, dishList:dish_List }).into('user_diary')
     
         return res.status(200).json({ status: 'SUCCESS', total_Cal, dish_List})
         }else{
