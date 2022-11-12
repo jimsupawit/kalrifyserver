@@ -134,7 +134,7 @@ async function delDiary(req, res, next){
 
     const diary = await knex('user_diary').where({ id:dishID }).update({ totalCal:newCal, dishList:newListData })
 
-    return res.status(200).json({ status: 'SUCCESS', newList, newCal})
+    return res.status(200).json({ status: 'SUCCESS', newList, temp})
     } catch(err) {
         return res.status(400).json({ status: 'SOMETHING_WENT_HORRIBLYWRONG' })
     }
@@ -142,7 +142,7 @@ async function delDiary(req, res, next){
     try{
         const diary = await knex('user_diary').where({ id:dishID }).del()
 
-        return res.status(200).json({ status: 'SUCCESS', newList, newCal})
+        return res.status(200).json({ status: 'SUCCESS', newList, temp})
         } catch(err) {
             return res.status(400).json({ status: 'SOMETHING_WENT_HORRIBLYWRONG' })
         } 
