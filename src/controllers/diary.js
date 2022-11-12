@@ -59,6 +59,7 @@ async function addDiary(req, res, next) {
         Sodium, 
         Portion
     } = req.body;
+    date_Now.setTime(date_Now.getTime() + 6 * 60 * 60 * 1000);
     
     
     const check = await knex('user_diary').select('date').where({ uid:id }).where('date', '>=', date_Now+"T00:00:00Z").where('date','<=', date_Now+'T23:59:59Z')
