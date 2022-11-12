@@ -124,7 +124,7 @@ async function delDiary(req, res, next){
     const temp = JSON.parse(dishListData[0].dishList)
     console.log(temp["body"])
     console.log(dishIndex)
-    var newList = temp["body"].splice(parseInt(dishIndex)-1,1);
+    var newList = temp["body"].splice(parseInt(dishIndex),1);
     newList = {"body": newList}
     newListData = JSON.stringify(newList)
     console.log(newListData)
