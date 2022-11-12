@@ -59,7 +59,7 @@ async function addDiary(req, res, next) {
         Sodium, 
         Portion
     } = req.body;
-    date_Now.setTime(date_Now.getTime() + 6 * 60 * 60 * 1000);
+    const date_Time = date_Now+ " 06:00:00";
     
     
     const check = await knex('user_diary').select('date').where({ uid:id }).where('date', '>=', date_Now+"T00:00:00Z").where('date','<=', date_Now+'T23:59:59Z')
@@ -79,7 +79,7 @@ async function addDiary(req, res, next) {
     try {
         if(check[0]==null){
             console.log('null')
-        const diary = await knex.insert({ uid:id,date:date_Now, totalCal:total_Cal, dishList:dish_List }).into('user_diary')
+        const diary = await knex.insert({ uid:id,date:date_Time, totalCal:total_Cal, dishList:dish_List }).into('user_diary')
     
         return res.status(200).json({ status: 'SUCCESS', total_Cal, dish_List})
         }else{
